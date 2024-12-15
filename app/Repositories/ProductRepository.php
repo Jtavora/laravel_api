@@ -6,31 +6,31 @@ use App\Interfaces\ProductRepositoryInterface;
 
 class ProductRepository implements ProductRepositoryInterface
 {
-    /**
-     * Create a new class instance.
-     */
-    public function __construct()
-    {
-        //
-    }
+   /**
+    * Create a new class instance.
+   */
+   public function __construct()
+   {
+      //
+   }
 
-    public function index(){
-        return Product::all();
-    }
+   public function index(){
+      return Product::all();
+   }
 
-    public function getById($id){
-       return Product::findOrFail($id);
-    }
+   public function getById($id){
+      return Product::findOrFail($id);
+   }
 
-    public function store(array $data){
-       return Product::create($data);
-    }
+   public function store(array $data){
+      return Product::create($data);
+   }
 
-    public function update(array $data,$id){
-       return Product::whereId($id)->update($data);
-    }
+   public function update(array $data,$id){
+      return Product::whereId($id)->update($data);
+   }
     
-    public function delete($id){
-       Product::destroy($id);
-    }
+   public function delete($id){
+      Product::destroy($id);
+   }
 }

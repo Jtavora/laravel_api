@@ -10,6 +10,12 @@ use App\Classes\ApiResponseClass;
 use App\Http\Resources\ProductResource;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * @OA\Tag(
+ *     name="Products",
+ *     description="API Endpoints for managing Products"
+ * )
+ */
 class ProductController extends Controller
 {
     private ProductRepositoryInterface $productRepositoryInterface;
@@ -21,7 +27,7 @@ class ProductController extends Controller
 
     /**
      * @OA\Get(
-     *    path="/api/products",
+     *    path="/products",
      *    summary="Get all products",
      *    tags={"Products"},
      *    security={{"bearerAuth":{}}},
@@ -42,17 +48,9 @@ class ProductController extends Controller
         return ApiResponseClass::sendResponse(ProductResource::collection($data),'',200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
    /**
      * @OA\Post(
-     *   path="/api/products",
+     *   path="/products",
      *   summary="Create a product",
      *   tags={"Products"},
      *   security={{"bearerAuth":{}}},
@@ -83,10 +81,10 @@ class ProductController extends Controller
         ];
         DB::beginTransaction();
         try{
-             $product = $this->productRepositoryInterface->store($details);
+            $product = $this->productRepositoryInterface->store($details);
 
-             DB::commit();
-             return ApiResponseClass::sendResponse(new ProductResource($product),'Product Create Successful',201);
+            DB::commit();
+            return ApiResponseClass::sendResponse(new ProductResource($product),'Product Create Successful',201);
 
         }catch(\Exception $ex){
             return ApiResponseClass::rollback($ex);
@@ -95,7 +93,7 @@ class ProductController extends Controller
 
     /**
      * @OA\Get(
-     *   path="/api/products/{id}",
+     *   path="/products/{id}",
      *   summary="Get a product",
      *   tags={"Products"},
      *   security={{"bearerAuth":{}}},
@@ -126,16 +124,8 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Product $product)
-    {
-        //
-    }
-
-    /**
      * @OA\Put(
-     *   path="/api/products/{id}",
+     *   path="/products/{id}",
      *   summary="Update a product",
      *   tags={"Products"},
      *   security={{"bearerAuth":{}}},
@@ -179,10 +169,10 @@ class ProductController extends Controller
         ];
         DB::beginTransaction();
         try{
-             $product = $this->productRepositoryInterface->update($updateDetails,$id);
+            $product = $this->productRepositoryInterface->update($updateDetails,$id);
 
-             DB::commit();
-             return ApiResponseClass::sendResponse('Product Update Successful','',201);
+            DB::commit();
+            return ApiResponseClass::sendResponse('Product Update Successful','',201);
 
         }catch(\Exception $ex){
             return ApiResponseClass::rollback($ex);

@@ -4,17 +4,21 @@ namespace App\Swagger;
 
 /**
  * @OA\Info(
- *     version="1.0.0",
- *     title="API - Laravel",
- *     description="Documentação da API",
- *     @OA\Contact(
- *         email=""
- *     )
+ *     title="API Documentation",
+ *     version="1.0.0"
  * )
  *
  * @OA\Server(
- *     url="http://localhost:8000",
- *     description="Servidor local"
+ *     url="http://localhost:8000/api",
+ *     description="API Local"
+ * )
+ *
+ * @OA\SecurityScheme(
+ *     securityScheme="bearerAuth",
+ *     type="http",
+ *     scheme="bearer",
+ *     bearerFormat="JWT",
+ *     description="JWT Authentication using Bearer token"
  * )
  */
 class ApiInfo {}

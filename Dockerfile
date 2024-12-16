@@ -28,8 +28,6 @@ RUN composer install
 # Definir permissões para o diretório de armazenamento
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-RUN php artisan migrate
-
 # Expor a porta 8000
 EXPOSE 8000
 
